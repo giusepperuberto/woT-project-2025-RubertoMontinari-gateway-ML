@@ -1,0 +1,1 @@
+# woT-project-2025-RubertoMontinari-EnergyDemandApp
