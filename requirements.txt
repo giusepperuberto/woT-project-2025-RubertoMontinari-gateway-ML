@@ -1,0 +1,12 @@
+streamlit
+pandas==2.3.1
+numpy
+scikit-learn
+joblib
+requests
+matplotlib
+seaborn
+shap
+xgboost
+build-essential
+os
