@@ -9,7 +9,7 @@ def clean_dataset(use_isolation_forest=False):
 
 
         # === 3. Carica e pulisci il terzo dataset ===
-    third_dataset_path = r"C:\Users\giuse\Desktop\dataset\dataset_esterni\energy_weather_raw_data.csv"
+    third_dataset_path = os.path.join("data", "energy_weather_raw_data.csv")
     df3 = pd.read_csv(third_dataset_path, parse_dates=['date'])
 
     df3 = df3.rename(columns={'date': 'datetime'})
@@ -35,8 +35,7 @@ def clean_dataset(use_isolation_forest=False):
     import numpy as np
 
     # === 4. Carica e pulisci il quarto dataset (da timestamp UNIX) ===
-    fourth_dataset_path = r"C:\Users\giuse\Desktop\dataset\dataset_esterni\HomeC.csv"
-
+    fourth_dataset_path = os.path.join("data", "HomeC.csv")
     # Leggo con gestione tipo e delimitatori inconsistenti
     df4 = pd.read_csv(fourth_dataset_path, low_memory=False)
 
@@ -79,7 +78,7 @@ def clean_dataset(use_isolation_forest=False):
     print("Dimensione df4:", df4.shape)
 
     # === 5. Carica e pulisci il quinto dataset (simile a HomeC.csv) ===
-    fifth_dataset_path = r"C:\Users\giuse\Desktop\dataset\dataset_esterni\Smart Home Dataset.csv"
+    fifth_dataset_path = os.path.join("data", "Smart Home Dataset.csv")
     df5 = pd.read_csv(fifth_dataset_path, low_memory=False)
 
     # Rimuove righe con timestamp non validi
@@ -116,8 +115,8 @@ def clean_dataset(use_isolation_forest=False):
     print(df5.head())
 
     # Percorso del file Excel contenente i dati simili a quelli che hai mostrato
-    excel_path = r"C:\Users\giuse\Desktop\dataset\dataset_prof\df_api_historical.xlsx"
-
+    #excel_path = r"C:\Users\giuse\Desktop\dataset\dataset_prof\df_api_historical.xlsx"
+    excel_path = os.path.join("data", "df_api_historical.xlsx")
     # Carica il file Excel (assumendo che i dati siano nel primo foglio o specifica il nome del foglio)
     df_api = pd.read_excel(excel_path)
 
@@ -160,8 +159,9 @@ def clean_dataset(use_isolation_forest=False):
     ###################
     #prova integrazione
     # --- Caricamento e pulizia dati multi-casa (da csv o excel) ---
-    file_path = r'C:\Users\giuse\Downloads\Smart Home Energy Consumption Optimization.csv'  # cambia percorso
-
+    #file_path = r'C:\Users\giuse\Downloads\Smart Home Energy Consumption Optimization.csv'  # cambia percorso
+    file_path = os.path.join("data", "Smart Home Energy Consumption Optimization.csv")
+    
     df = pd.read_csv(file_path)  # o pd.read_excel se excel
 
     # Converte timestamp in datetime
@@ -216,13 +216,15 @@ def clean_dataset(use_isolation_forest=False):
 
 
     # === 1. Caricamento dati consumo ===
-    df_energy = pd.read_csv(r"C:\Users\giuse\Desktop\dataset\dataset_esterni\utilizzabili\HomeB-meter1_2015.csv")  # metti il tuo path
+    #df_energy = pd.read_csv(r"C:\Users\giuse\Desktop\dataset\dataset_esterni\utilizzabili\HomeB-meter1_2015.csv")  # metti il tuo path
+    df_energy = os.path.join("data", "HomeB-meter1_2015.csv")
     df_energy['datetime'] = pd.to_datetime(df_energy['Date & Time'])
     df_energy['datetime'] = df_energy['datetime'].dt.floor('h')  # arrotonda all'ora
     df_energy_hourly = df_energy.groupby('datetime')['use [kW]'].mean().reset_index()
 
     # === 2. Caricamento dati meteo ===
-    df_weather = pd.read_csv(r"C:\Users\giuse\Desktop\dataset\dataset_esterni\utilizzabili\homeB2015.csv")  # metti il tuo path
+    #df_weather = pd.read_csv(r"C:\Users\giuse\Desktop\dataset\dataset_esterni\utilizzabili\homeB2015.csv")  # metti il tuo path
+    df_weather = os.path.join("data", "homeB2015.csv")
     df_weather['datetime'] = pd.to_datetime(df_weather['time'], unit='s')
     df_weather['datetime'] = df_weather['datetime'].dt.floor('h')  # arrotonda all'ora
     df_weather_hourly = df_weather.groupby('datetime')[['temperature', 'humidity']].mean().reset_index()
@@ -245,13 +247,15 @@ def clean_dataset(use_isolation_forest=False):
 
 
     # === 1. Caricamento dati consumo ===
-    df_energy_14 = pd.read_csv(r"C:\Users\giuse\Desktop\dataset\dataset_esterni\utilizzabili\HomeB-meter1_2014.csv")  # metti il tuo path
+    #df_energy_14 = pd.read_csv(r"C:\Users\giuse\Desktop\dataset\dataset_esterni\utilizzabili\HomeB-meter1_2014.csv")  # metti il tuo path
+    df_energy_14 = os.path.join("data", "HomeB-meter1_2014.csv")
     df_energy_14['datetime'] = pd.to_datetime(df_energy_14['Date & Time'])
     df_energy_14['datetime'] = df_energy_14['datetime'].dt.floor('h')  # arrotonda all'ora
     df_energy_hourly_14 = df_energy.groupby('datetime')['use [kW]'].mean().reset_index()
 
     # === 2. Caricamento dati meteo ===
-    df_weather_14 = pd.read_csv(r"C:\Users\giuse\Desktop\dataset\dataset_esterni\utilizzabili\homeB2014.csv")  # metti il tuo path
+    #df_weather_14 = pd.read_csv(r"C:\Users\giuse\Desktop\dataset\dataset_esterni\utilizzabili\homeB2014.csv")  # metti il tuo path
+    df_weather_14 = os.path.join("data", "homeB2014.csv")
     df_weather_14['datetime'] = pd.to_datetime(df_weather_14['time'], unit='s')
     df_weather_14['datetime'] = df_weather_14['datetime'].dt.floor('h')  # arrotonda all'ora
     df_weather_hourly_14 = df_weather_14.groupby('datetime')[['temperature', 'humidity']].mean().reset_index()
@@ -324,6 +328,7 @@ def clean_dataset(use_isolation_forest=False):
 
 if __name__ == "__main__":
     clean_dataset(use_isolation_forest=True)  # True o False come preferisci
+
 
 
 
